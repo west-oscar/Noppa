@@ -1,5 +1,7 @@
-import random 
+import random
 import tkinter as tk
+
+
 class GraphicalDice:
     def __init__(self, root):
         self.root = root
@@ -8,7 +10,7 @@ class GraphicalDice:
         self.root.config(bg="#f0f0f0")
 
         # Otsikko
-        self.label = tk.label(
+        self.label = tk.Label(
             root,
             text="Heitä noppaa painamalla nappia",
             font=("Arial", 14),
@@ -17,7 +19,7 @@ class GraphicalDice:
         self.label.pack(pady=15)
 
         # Piirtoalusta nupille (Canvas)
-        self.canvas = tk.canvas(
+        self.canvas = tk.Canvas(
             root, width=150, height=150, bg="white", highlightthickness=2
         )
         self.canvas.pack(pady=10)
@@ -30,20 +32,21 @@ class GraphicalDice:
             bg="#4CAF50",
             fg="white",
             padx=10,
-            pady=5,å
+            pady=5,
             command=self.roll_dice,
         )
         self.roll_button.pack(pady=15)
 
         # Piirretään aloitusnoppa (luku 1)
         self.draw_dice(1)
+
     def draw_dice(self, number):
         # Tyhjennetään alusta
         self.canvas.delete("all")
 
         # Pisteiden koordinaatit eri silmäluvuille (x, y)
         # Nopan koko on 150x150 joten koordinaatit skaalataan sen mukaan.
-        r = 10 # Pisteen säde 
+        r = 10  # Pisteen säde
         # Pisteiden sijainnit: vasen, keski, oikea / ylä, keski, ala
         positions = {
             1: [(75, 75)],
@@ -60,16 +63,15 @@ class GraphicalDice:
                 x - r, y - r, x + r, y + r, fill="black", outline="black"
             )
 
-        def roll_dice(self):
-            # Arvotaan luku 1-6
-            number = random.randint(1, 6)
-            # Päivitetään teksti ja piirretään noppa uudelleen
-            self.label.config(text=f"Heitit: {number}")
-            self.draw_dice(number)
+    def roll_dice(self):
+        # Arvotaan luku 1-6
+        number = random.randint(1, 6)
+        # Päivitetään teksti ja piirretään noppa uudelleen
+        self.label.config(text=f"Heitit: {number}")
+        self.draw_dice(number)
 
-        # Ohjelman käynnistys
-        if __name__ == "__main__":
-            root = tk.TK()
-            app = GraphicalDice(root)
-            root.mainloop()
-            
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = GraphicalDice(root)
+    root.mainloop()
